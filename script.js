@@ -37,9 +37,9 @@ function listaUsuarios() {
 }
 
 function funcionamento() {
-  perguntaNome();
-  entrarNoChat();
-  listaUsuarios();
+  //   perguntaNome();
+  //   entrarNoChat();
+  //   listaUsuarios();
 }
 
 funcionamento();
