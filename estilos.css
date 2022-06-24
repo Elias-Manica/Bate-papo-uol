@@ -12,6 +12,10 @@
     font-family: "Roboto";
   }
 
+  b {
+    color: #aaaaaa;
+  }
+
   strong {
     font-weight: bold;
   }
@@ -93,6 +97,8 @@
     align-items: center;
     height: 100%;
     background-color: #ffdede;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   .global {

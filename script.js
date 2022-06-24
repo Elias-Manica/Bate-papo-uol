@@ -29,17 +29,21 @@ function nomeIndisponivel(resposta) {
 }
 
 function listaUsuarios() {
+  let dataAtual = new Date();
+  let hora = dataAtual.getHours();
+  let min = dataAtual.getMinutes();
+  let sec = dataAtual.getSeconds();
   let entrada = document.querySelector(".corpo");
   entrada.innerHTML = `
     <div class="entrou">
-        <p>(09:21:45) ${nome} entra na sala...</p>
+        <p><b>(${hora}:${min}:${sec})</b> <strong> ${nome} </strong> entra na sala...</p>
     </div>`;
 }
 
 function funcionamento() {
-  //   perguntaNome();
-  //   entrarNoChat();
-  //   listaUsuarios();
+  perguntaNome();
+  entrarNoChat();
+  listaUsuarios();
 }
 
 funcionamento();
