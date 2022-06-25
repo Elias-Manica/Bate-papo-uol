@@ -1,4 +1,9 @@
 let nome;
+let type;
+let from;
+let text;
+let time;
+let to;
 
 function perguntaNome() {
   nome = prompt("Qual o seu nome?");
@@ -25,7 +30,52 @@ function nomeDisponivel(resposta) {
 
 function nomeIndisponivel(resposta) {
   console.log(resposta.response.status);
-  console.log("nome indisponivel");
+  if (resposta.response.status === 400) {
+    funcionamento();
+  }
+}
+
+function manterConexao() {
+  let nomeconectado = {
+    name: `${nome}`,
+  };
+
+  const promise = axios.post(
+    "https://mock-api.driven.com.br/api/v6/uol/status",
+    nomeconectado
+  );
+}
+
+function pegarMensagens() {
+  const promise = axios.get(
+    "https://mock-api.driven.com.br/api/v6/uol/messages"
+  );
+
+  promise.then(printarMensagens);
+}
+
+function printarMensagens(mensagem) {
+  const msg = mensagem.data;
+
+  for (let i = 0; i < msg.length; i++) {
+    from = msg[i].from;
+    text = msg[i].text;
+    time = msg[i].time;
+    to = msg[i].to;
+    type = msg[i].type;
+    console.log(from, text, time, to, type);
+    tipoDeMensagem();
+  }
+}
+
+function tipoDeMensagem() {
+  let entrada = document.querySelector(".corpo");
+  if (type === "status") {
+    entrada.innerHTML += `
+    <div class="entrou">
+        <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>
+    </div>`;
+  }
 }
 
 function listaUsuarios() {
@@ -44,6 +94,9 @@ function funcionamento() {
   perguntaNome();
   entrarNoChat();
   listaUsuarios();
+  pegarMensagens();
+  setInterval(manterConexao, 5000);
+  pegarMensagens();
 }
 
 funcionamento();
