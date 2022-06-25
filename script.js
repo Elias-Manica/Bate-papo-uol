@@ -4,6 +4,7 @@ let from;
 let text;
 let time;
 let to;
+let entrar;
 
 function perguntaNome() {
   nome = prompt("Qual o seu nome?");
@@ -64,17 +65,22 @@ function printarMensagens(mensagem) {
     to = msg[i].to;
     type = msg[i].type;
     console.log(from, text, time, to, type);
-    tipoDeMensagem();
   }
+
+  tipoDeMensagem();
 }
 
 function tipoDeMensagem() {
   let entrada = document.querySelector(".corpo");
+  let comparar = document.querySelector(".corpo").lastChild.innerHTML;
+  entrar = `\n          <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>\n      `;
   if (type === "status") {
-    entrada.innerHTML += `
-    <div class="entrou">
-        <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>
-    </div>`;
+    if (comparar !== entrar) {
+      entrada.innerHTML += `
+      <div class="entrou">
+          <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>
+      </div>`;
+    }
   }
 }
 
@@ -94,9 +100,9 @@ function funcionamento() {
   perguntaNome();
   entrarNoChat();
   listaUsuarios();
-  pegarMensagens();
   setInterval(manterConexao, 5000);
   pegarMensagens();
+  setInterval(pegarMensagens, 3000);
 }
 
 funcionamento();
