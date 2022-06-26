@@ -5,7 +5,8 @@ let text;
 let time;
 let to;
 let entrar;
-let dados = [];
+let tipo;
+let para;
 let msg;
 let texto;
 let mensagemEscrita;
@@ -62,39 +63,34 @@ function pegarMensagens() {
 function printarMensagens(mensagem) {
   msg = mensagem.data;
   console.log(msg);
-  msg = msg.slice([90], [100]);
-  for (let i = 0; i < msg.length; i++) {
-    from = msg[i].from;
-    text = msg[i].text;
-    time = msg[i].time;
-    to = msg[i].to;
-    type = msg[i].type;
-  }
-  tipoDeMensagem();
-}
-
-function tipoDeMensagem() {
   let entrada = document.querySelector(".corpo");
-
-  let comparar = document.querySelector(".corpo").lastChild.innerHTML;
+  entrada.innerHTML = "";
   entrar = `\n          <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>\n      `;
-  texto = `\n        <p><b>(${time})</b> <strong> ${from} </strong> para ${to}: ${text}</p>\n      `;
-
-  if (type === "status") {
-    if (comparar !== entrar) {
-      entrada.innerHTML += `
-      <div class="entrou">
-          <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>
-      </div>`;
+  texto = `\n          <p><b>(${time})</b> <strong> ${from} </strong> para ${to}: ${text}</p>\n        `;
+  let ultima = "";
+  for (let i = 0; i < msg.length; i++) {
+    if (i === msg.length - 1) {
+      ultima = "true";
     }
-  }
-
-  if (type === "message") {
-    if (comparar !== texto) {
+    tipo = msg[i].type;
+    para = msg[i].to;
+    if (tipo === "message") {
+      if (para === "Todos") {
+        entrada.innerHTML += `
+        <div class="global">
+          <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+        </div>`;
+      } else if (to !== "Todos") {
+        entrada.innerHTML += `
+        <div class="privado">
+          <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+        </div>`;
+      }
+    } else if (tipo === "status") {
       entrada.innerHTML += `
-      <div class="global">
-        <p><b>(${time})</b> <strong> ${from} </strong> para Todos: ${text}</p>
-      </div>`;
+        <div class="entrou">
+            <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
+        </div>`;
     }
   }
 }
@@ -113,6 +109,12 @@ function tipoDeMensagem() {
 
 function listaUsuarios() {}
 
+function exemplo(array) {
+  if (array[0] === nome) {
+    return true;
+  }
+}
+
 function enviaMensagem() {
   mensagemEscrita = document.querySelector("input").value;
   let messageInput = {
@@ -125,7 +127,7 @@ function enviaMensagem() {
     "https://mock-api.driven.com.br/api/v6/uol/messages",
     messageInput
   );
-  mensagemEscrita = "";
+  document.querySelector("input").value = "";
 
   promise.then(confirmacaoMsg);
   promise.catch(msgnaofoi);
