@@ -72,6 +72,9 @@ function printarMensagens(mensagem) {
     tipo = msg[i].type;
     para = msg[i].to;
     if (indexEu !== 99) {
+      if (indexEu === 0) {
+        indexEu = 98;
+      }
       console.log(indexEu);
       if (tipo === "message") {
         if (para === "Todos") {
@@ -104,25 +107,7 @@ function printarMensagens(mensagem) {
       if (msg[i].from === nome) {
         indexEu = i;
         console.log(indexEu);
-        if (tipo === "message") {
-          if (para === "Todos") {
-            entrada.innerHTML += `
-          <div class="global">
-            <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
-          </div>`;
-            let ultimoElemento = document.querySelector(".corpo").lastChild;
-            ultimoElemento.scrollIntoView();
-          } else if (para !== "Todos") {
-            if (para === nome) {
-              entrada.innerHTML += `
-            <div class="privado">
-              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
-            </div>`;
-              let ultimoElemento = document.querySelector(".corpo").lastChild;
-              ultimoElemento.scrollIntoView();
-            }
-          }
-        } else if (tipo === "status") {
+        if (tipo === "status") {
           entrada.innerHTML += `
           <div class="entrou">
               <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
