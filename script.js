@@ -160,7 +160,7 @@ function exibirParticipantes(array) {
       <div class="nomes" onclick ="selecionarPessoa(this)" data-identifier="participant">
         <ion-icon name="people"></ion-icon>
         <span>Todos</span>
-        <ion-icon name="checkmark" class="certo oculto"></ion-icon>
+        <ion-icon name="checkmark" class="certo ativo"></ion-icon>
       </div>
   `;
   for (let i = 0; i < lista.length; i++) {
@@ -176,6 +176,13 @@ function exibirParticipantes(array) {
 
 function selecionarPessoa(elemento) {
   destinatario = elemento.children[1].innerHTML;
+  let iconeativo = document.querySelector(".ativo");
+  if (iconeativo !== null) {
+    iconeativo.classList.add("oculto");
+    iconeativo.classList.remove("ativo");
+  }
+  icone = elemento.children[2].classList.add("ativo");
+  icone = elemento.children[2].classList.remove("oculto");
   let destMsg = document.querySelector(".destinario");
   destMsg.innerHTML = `
     Enviando para ${destinatario}
