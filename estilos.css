@@ -1,195 +1,193 @@
-@media (max-width: 614px) {
-  body {
-    background-color: #f3f3f3;
-  }
+body {
+  background-color: #f3f3f3;
+}
 
-  * {
-    box-sizing: border-box;
-  }
+* {
+  box-sizing: border-box;
+}
 
-  p {
-    padding-left: 5px;
-    font-family: "Roboto";
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+p {
+  padding-left: 5px;
+  font-family: "Roboto";
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
 
-  b {
-    color: #aaaaaa;
-  }
+b {
+  color: #aaaaaa;
+}
 
-  strong {
-    font-weight: bold;
-  }
+strong {
+  font-weight: bold;
+}
 
-  input {
-    cursor: pointer;
-  }
+input {
+  cursor: pointer;
+}
 
-  .topoFixo {
-    width: 100%;
-    height: 80px;
-    background-color: #ffffff;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
+.topoFixo {
+  width: 100%;
+  height: 80px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
 
-  .topoFixo img {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 175px;
-  }
+.topoFixo img {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 175px;
+}
 
-  .topoFixo ion-icon {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 45px;
-  }
+.topoFixo ion-icon {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 45px;
+}
 
-  .barraFixa {
-    width: 100%;
-    height: 80px;
-    background-color: #ffffff;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
-    display: flex;
-    align-items: center;
-  }
+.barraFixa {
+  width: 100%;
+  height: 80px;
+  background-color: #ffffff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
 
-  .barraFixa input {
-    height: 80px;
-    width: 80%;
-    border: none;
-    outline: 0;
-    padding-left: 15px;
-  }
+.barraFixa input {
+  height: 80px;
+  width: 80%;
+  border: none;
+  outline: 0;
+  padding-left: 15px;
+}
 
-  input::placeholder {
-    color: black;
-    font-style: italic;
-    font-family: "Roboto", sans-serif;
-    line-height: 21px;
-  }
+input::placeholder {
+  color: black;
+  font-style: italic;
+  font-family: "Roboto", sans-serif;
+  line-height: 21px;
+}
 
-  .barraFixa ion-icon {
-    position: absolute;
-    right: 20px;
-    font-size: 26px;
-  }
+.barraFixa ion-icon {
+  position: absolute;
+  right: 20px;
+  font-size: 26px;
+}
 
-  .corpo {
-    overflow-x: clip;
-    overflow-y: auto;
-    margin-bottom: 80px;
-    margin-top: 80px;
-  }
+.corpo {
+  overflow-x: clip;
+  overflow-y: auto;
+  margin-bottom: 80px;
+  margin-top: 80px;
+}
 
-  .entrou {
-    display: flex;
-    background-color: #dcdcdc;
-    width: 100%;
-    margin-top: 5px;
-    align-items: center;
-  }
+.entrou {
+  display: flex;
+  background-color: #dcdcdc;
+  width: 100%;
+  margin-top: 5px;
+  align-items: center;
+}
 
-  .privado {
-    display: flex;
-    align-items: center;
-    background-color: #ffdede;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+.privado {
+  display: flex;
+  align-items: center;
+  background-color: #ffdede;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-  .global {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    width: 100%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+.global {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 
-  .oculto {
-    display: none;
-  }
+.oculto {
+  display: none;
+}
 
-  .escolhacontato {
-    background-color: #ffffff;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 70%;
-    z-index: 1;
-    overflow-y: scroll;
-    transition: all linear 2s;
-  }
+.escolhacontato {
+  background-color: #ffffff;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 70%;
+  z-index: 1;
+  overflow-y: scroll;
+  transition: all linear 2s;
+}
 
-  .completar {
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 30%;
-  }
+.completar {
+  position: fixed;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 30%;
+}
 
-  .titulo {
-    width: 79%;
-    margin: 20px auto;
-    text-align: center;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700;
-  }
+.titulo {
+  width: 79%;
+  margin: 20px auto;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
 
-  .nomes {
-    padding: 15px;
-    display: flex;
-    align-items: center;
-  }
+.nomes {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+}
 
-  .nomes span {
-    font-family: "Roboto";
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 19px;
-    margin-left: 2px;
-  }
+.nomes span {
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  margin-left: 2px;
+}
 
-  .nomes ion-icon {
-    font-size: 25px;
-  }
+.nomes ion-icon {
+  font-size: 25px;
+}
 
-  .certo {
-    color: #28bb25;
-    margin-left: 50%;
-  }
+.certo {
+  color: #28bb25;
+  margin-left: 50%;
+}
 
-  .destinario {
-    height: 20px;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    font-family: "Roboto";
-    font-style: normal;
-    font-weight: 300;
-    font-size: 14px;
-    line-height: 25px;
-    padding-left: 13px;
-    color: black;
-  }
+.destinario {
+  height: 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 25px;
+  padding-left: 13px;
+  color: black;
+}
 
-  .fixado {
-    position: fixed;
-  }
+.fixado {
+  position: fixed;
+}
 
-  .escuro {
-    background-color: rgba(0, 0, 0, 0.6);
-  }
+.escuro {
+  background-color: rgba(0, 0, 0, 0.6);
 }

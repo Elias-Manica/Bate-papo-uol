@@ -9,9 +9,14 @@ let para;
 let msg;
 let destinatario;
 let mensagemEscrita;
+let icone;
 
 function perguntaNome() {
   nome = prompt("Qual o seu nome?");
+  while (nome === null) {
+    nome = prompt("Qual o seu nome?");
+  }
+
   destinatario = "Todos";
 }
 
@@ -25,16 +30,12 @@ function entrarNoChat() {
     nomeServidor
   );
 
-  promise.then(nomeDisponivel);
   promise.catch(nomeIndisponivel);
 }
 
-function nomeDisponivel(resposta) {}
-
 function nomeIndisponivel(resposta) {
   if (resposta.response.status === 400) {
-    alert("Esse nome já está sendo utilizado, digite outro");
-    funcionamento();
+    window.location.reload();
   }
 }
 
@@ -140,12 +141,6 @@ function printarMensagens(mensagem) {
   }
 }
 
-function exemplo(array) {
-  if (array[0] === nome) {
-    return true;
-  }
-}
-
 function enviaMensagem() {
   mensagemEscrita = document.querySelector("input").value;
   let messageInput = {
@@ -160,11 +155,8 @@ function enviaMensagem() {
   );
   document.querySelector("input").value = "";
 
-  promise.then(confirmacaoMsg);
   promise.catch(msgnaofoi);
 }
-
-function confirmacaoMsg() {}
 
 function msgnaofoi() {
   alert(
@@ -186,17 +178,16 @@ function exibirParticipantes(array) {
   participantes.innerHTML = "";
   participantes.innerHTML = `
       <div class="titulo">Escolha um contato para enviar mensagem:</div>
-      <div class="nomes" onclick ="selecionarPessoa(this)">
+      <div class="nomes" onclick ="selecionarPessoa(this)" data-identifier="participant">
         <ion-icon name="people"></ion-icon>
         <span>Todos</span>
-        <ion-icon name="checkmark" class="certo"></ion-icon>
+        <ion-icon name="checkmark" class="certo oculto"></ion-icon>
       </div>
   `;
   for (let i = 0; i < lista.length; i++) {
-    console.log(lista[i].name);
     participantes.innerHTML += `
       
-      <div class="nomes" onclick ="selecionarPessoa(this)">
+      <div class="nomes" onclick ="selecionarPessoa(this)" data-identifier="participant">
         <ion-icon name="person-circle"></ion-icon>
         <span>${lista[i].name}</span>
         <ion-icon name="checkmark" class="certo oculto"></ion-icon>
@@ -210,7 +201,6 @@ function selecionarPessoa(elemento) {
   destMsg.innerHTML = `
     Enviando para ${destinatario}
   `;
-  return destinatario;
 }
 
 function aparecerLateral() {
@@ -231,8 +221,8 @@ function funcionamento() {
   perguntaNome();
   entrarNoChat();
   buscarParticipantes();
-  setInterval(manterConexao, 5000);
   pegarMensagens();
+  setInterval(manterConexao, 5000);
   setInterval(pegarMensagens, 3000);
   setInterval(buscarParticipantes, 10000);
 }
