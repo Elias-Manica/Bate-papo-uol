@@ -7,10 +7,12 @@ let to;
 let tipo;
 let para;
 let msg;
+let destinatario;
 let mensagemEscrita;
 
 function perguntaNome() {
   nome = prompt("Qual o seu nome?");
+  destinatario = "Todos";
 }
 
 function entrarNoChat() {
@@ -65,8 +67,33 @@ function printarMensagens(mensagem) {
     tipo = msg[i].type;
     para = msg[i].to;
     if (indexEu !== 99) {
-      if (indexEu === 0) {
-        indexEu = 98;
+      if (indexEu < 1) {
+        if (tipo === "message") {
+          if (para === "Todos") {
+            entrada.innerHTML += `
+            <div class="global">
+              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+            </div>`;
+            let ultimoElemento = document.querySelector(".corpo").lastChild;
+            ultimoElemento.scrollIntoView();
+          } else if (para !== "Todos") {
+            if (para === nome || msg[i].from === nome) {
+              entrada.innerHTML += `
+              <div class="privado">
+                <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+              </div>`;
+              let ultimoElemento = document.querySelector(".corpo").lastChild;
+              ultimoElemento.scrollIntoView();
+            }
+          }
+        } else if (tipo === "status") {
+          entrada.innerHTML += `
+            <div class="entrou">
+                <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
+            </div>`;
+          let ultimoElemento = document.querySelector(".corpo").lastChild;
+          ultimoElemento.scrollIntoView();
+        }
       }
 
       if (tipo === "message") {
@@ -123,7 +150,7 @@ function enviaMensagem() {
   mensagemEscrita = document.querySelector("input").value;
   let messageInput = {
     from: `${nome}`,
-    to: "Todos",
+    to: `${destinatario}`,
     text: `${mensagemEscrita}`,
     type: "message",
   };
@@ -156,15 +183,34 @@ function buscarParticipantes() {
 function exibirParticipantes(array) {
   lista = array.data;
   let participantes = document.querySelector(".escolhacontato");
+  participantes.innerHTML = "";
+  participantes.innerHTML = `
+      <div class="titulo">Escolha um contato para enviar mensagem:</div>
+      <div class="nomes" onclick ="selecionarPessoa(this)">
+        <ion-icon name="people"></ion-icon>
+        <span>Todos</span>
+        <ion-icon name="checkmark" class="certo"></ion-icon>
+      </div>
+  `;
   for (let i = 0; i < lista.length; i++) {
     console.log(lista[i].name);
     participantes.innerHTML += `
-      <div class="nomes">
+      
+      <div class="nomes" onclick ="selecionarPessoa(this)">
         <ion-icon name="person-circle"></ion-icon>
         <span>${lista[i].name}</span>
         <ion-icon name="checkmark" class="certo oculto"></ion-icon>
       </div>`;
   }
+}
+
+function selecionarPessoa(elemento) {
+  destinatario = elemento.children[1].innerHTML;
+  let destMsg = document.querySelector(".destinario");
+  destMsg.innerHTML = `
+    Enviando para ${destinatario}
+  `;
+  return destinatario;
 }
 
 function aparecerLateral() {

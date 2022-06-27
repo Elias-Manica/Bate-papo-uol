@@ -21,6 +21,7 @@
         <ion-icon name="people" onclick="aparecerLateral()"></ion-icon>
       </div>
       <div class="corpo"></div>
+
       <div class="barraFixa">
         <input placeholder="Escreva aqui..." />
         <ion-icon
@@ -28,21 +29,10 @@
           onclick="enviaMensagem()"
         ></ion-icon>
       </div>
+      <div class="destinario">Enviando para Todos</div>
     </div>
     <div class="completar escuro oculto" onclick="tirarLateral()"></div>
-    <div class="escolhacontato oculto">
-      <div class="titulo">Escolha um contato para enviar mensagem:</div>
-      <div class="todos">
-        <ion-icon name="people"></ion-icon>
-        <span>Todos</span>
-        <ion-icon name="checkmark" class="certo"></ion-icon>
-      </div>
-      <div class="nomes">
-        <ion-icon name="person-circle"></ion-icon>
-        <span>João</span>
-        <ion-icon name="checkmark" class="certo oculto"></ion-icon>
-      </div>
-    </div>
+    <div class="escolhacontato oculto"></div>
   </body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
