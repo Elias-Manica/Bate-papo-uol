@@ -8,7 +8,7 @@
   }
 
   p {
-    margin-left: 5px;
+    padding-left: 5px;
     font-family: "Roboto";
     padding-top: 20px;
     padding-bottom: 20px;
@@ -122,11 +122,22 @@
   .escolhacontato {
     background-color: #ffffff;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     width: 70%;
     z-index: 1;
+    overflow-y: scroll;
+    transition: all linear 2s;
+  }
+
+  .completar {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 30%;
   }
 
   .titulo {
@@ -137,7 +148,7 @@
     font-weight: 700;
   }
   .todos {
-    padding: 5px;
+    padding: 15px;
     display: flex;
     align-items: center;
   }
@@ -154,7 +165,34 @@
     font-size: 25px;
   }
 
+  .nomes {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+  }
+
+  .nomes span {
+    font-family: "Roboto";
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    margin-left: 2px;
+  }
+
+  .nomes ion-icon {
+    font-size: 25px;
+  }
+
+  .certo {
+    color: #28bb25;
+    margin-left: 50%;
+  }
+
   .fixado {
     position: fixed;
+  }
+
+  .escuro {
+    background-color: rgba(0, 0, 0, 0.6);
   }
 }

@@ -4,11 +4,9 @@ let from;
 let text;
 let time;
 let to;
-let entrar;
 let tipo;
 let para;
 let msg;
-let texto;
 let mensagemEscrita;
 
 function perguntaNome() {
@@ -29,13 +27,9 @@ function entrarNoChat() {
   promise.catch(nomeIndisponivel);
 }
 
-function nomeDisponivel(resposta) {
-  console.log(resposta.status);
-  console.log("nome disponivel");
-}
+function nomeDisponivel(resposta) {}
 
 function nomeIndisponivel(resposta) {
-  console.log(resposta.response.status);
   if (resposta.response.status === 400) {
     alert("Esse nome já está sendo utilizado, digite outro");
     funcionamento();
@@ -64,7 +58,6 @@ function pegarMensagens() {
 function printarMensagens(mensagem) {
   msg = mensagem.data;
 
-  console.log(msg);
   let entrada = document.querySelector(".corpo");
   let indexEu = 99;
   entrada.innerHTML = "";
@@ -75,7 +68,7 @@ function printarMensagens(mensagem) {
       if (indexEu === 0) {
         indexEu = 98;
       }
-      console.log(indexEu);
+
       if (tipo === "message") {
         if (para === "Todos") {
           entrada.innerHTML += `
@@ -106,7 +99,7 @@ function printarMensagens(mensagem) {
     if (indexEu === 99) {
       if (msg[i].from === nome) {
         indexEu = i;
-        console.log(indexEu);
+
         if (tipo === "status") {
           entrada.innerHTML += `
           <div class="entrou">
@@ -144,24 +137,58 @@ function enviaMensagem() {
   promise.catch(msgnaofoi);
 }
 
-function confirmacaoMsg() {
-  console.log("chegou");
-}
+function confirmacaoMsg() {}
 
 function msgnaofoi() {
-  console.log("não chegou");
   alert(
     "Você ficou muito tempo inativo, reiniciaremos a página para você enviar mensagem de novo"
   );
   window.location.reload();
 }
 
+function buscarParticipantes() {
+  let promise = axios.get(
+    "https://mock-api.driven.com.br/api/v6/uol/participants"
+  );
+  promise.then(exibirParticipantes);
+}
+
+function exibirParticipantes(array) {
+  lista = array.data;
+  let participantes = document.querySelector(".escolhacontato");
+  for (let i = 0; i < lista.length; i++) {
+    console.log(lista[i].name);
+    participantes.innerHTML += `
+      <div class="nomes">
+        <ion-icon name="person-circle"></ion-icon>
+        <span>${lista[i].name}</span>
+        <ion-icon name="checkmark" class="certo oculto"></ion-icon>
+      </div>`;
+  }
+}
+
+function aparecerLateral() {
+  let lateral = document.querySelector(".escolhacontato");
+  let esquerda = document.querySelector(".completar");
+  lateral.classList.remove("oculto");
+  esquerda.classList.remove("oculto");
+}
+
+function tirarLateral() {
+  let lateral = document.querySelector(".escolhacontato");
+  let esquerda = document.querySelector(".completar");
+  lateral.classList.add("oculto");
+  esquerda.classList.add("oculto");
+}
+
 function funcionamento() {
   perguntaNome();
   entrarNoChat();
+  buscarParticipantes();
   setInterval(manterConexao, 5000);
   pegarMensagens();
   setInterval(pegarMensagens, 3000);
+  setInterval(buscarParticipantes, 10000);
 }
 
 funcionamento();
