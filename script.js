@@ -11,6 +11,8 @@ let destinatario;
 let mensagemEscrita;
 let icone;
 
+funcionamento();
+
 function perguntaNome() {
   nome = prompt("Qual o seu nome?");
   while (nome === null) {
@@ -158,7 +160,7 @@ function exibirParticipantes(array) {
       <div class="nomes" onclick ="selecionarPessoa(this)" data-identifier="participant">
         <ion-icon name="people"></ion-icon>
         <span>Todos</span>
-        <ion-icon name="checkmark" class="certo"></ion-icon>
+        <ion-icon name="checkmark" class="certo oculto"></ion-icon>
       </div>
   `;
   for (let i = 0; i < lista.length; i++) {
@@ -201,7 +203,5 @@ function funcionamento() {
   pegarMensagens();
   setInterval(manterConexao, 5000);
   setInterval(pegarMensagens, 3000);
-  setInterval(buscarParticipantes, 10000);
+  setInterval(buscarParticipantes, 5000);
 }
-
-funcionamento();
