@@ -59,6 +59,8 @@ function pegarMensagens() {
 }
 
 function printarMensagens(mensagem) {
+  let gif = document.querySelector(".lds-dual-ring");
+
   msg = mensagem.data;
 
   let entrada = document.querySelector(".corpo");
@@ -69,34 +71,9 @@ function printarMensagens(mensagem) {
     para = msg[i].to;
     if (indexEu !== 99) {
       if (indexEu < 1) {
-        if (tipo === "message") {
-          if (para === "Todos") {
-            entrada.innerHTML += `
-            <div class="global">
-              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
-            </div>`;
-            let ultimoElemento = document.querySelector(".corpo").lastChild;
-            ultimoElemento.scrollIntoView();
-          } else if (para !== "Todos") {
-            if (para === nome || msg[i].from === nome) {
-              entrada.innerHTML += `
-              <div class="privado">
-                <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
-              </div>`;
-              let ultimoElemento = document.querySelector(".corpo").lastChild;
-              ultimoElemento.scrollIntoView();
-            }
-          }
-        } else if (tipo === "status") {
-          entrada.innerHTML += `
-            <div class="entrou">
-                <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
-            </div>`;
-          let ultimoElemento = document.querySelector(".corpo").lastChild;
-          ultimoElemento.scrollIntoView();
-        }
+        console.log("Oi");
       }
-
+      gif.classList.add("oculto");
       if (tipo === "message") {
         if (para === "Todos") {
           entrada.innerHTML += `
@@ -181,7 +158,7 @@ function exibirParticipantes(array) {
       <div class="nomes" onclick ="selecionarPessoa(this)" data-identifier="participant">
         <ion-icon name="people"></ion-icon>
         <span>Todos</span>
-        <ion-icon name="checkmark" class="certo oculto"></ion-icon>
+        <ion-icon name="checkmark" class="certo"></ion-icon>
       </div>
   `;
   for (let i = 0; i < lista.length; i++) {
