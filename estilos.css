@@ -84,7 +84,8 @@
   }
 
   .corpo {
-    height: 1000px;
+    overflow-x: clip;
+    overflow-y: auto;
     margin-bottom: 80px;
     margin-top: 80px;
   }
@@ -151,5 +152,9 @@
 
   .todos ion-icon {
     font-size: 25px;
+  }
+
+  .fixado {
+    position: fixed;
   }
 }

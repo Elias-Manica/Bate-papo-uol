@@ -37,6 +37,7 @@ function nomeDisponivel(resposta) {
 function nomeIndisponivel(resposta) {
   console.log(resposta.response.status);
   if (resposta.response.status === 400) {
+    alert("Esse nome já está sendo utilizado, digite outro");
     funcionamento();
   }
 }
@@ -62,52 +63,77 @@ function pegarMensagens() {
 
 function printarMensagens(mensagem) {
   msg = mensagem.data;
+
   console.log(msg);
   let entrada = document.querySelector(".corpo");
+  let indexEu = 99;
   entrada.innerHTML = "";
-  entrar = `\n          <p><b>(${time})</b> <strong> ${from} </strong> ${text}</p>\n      `;
-  texto = `\n          <p><b>(${time})</b> <strong> ${from} </strong> para ${to}: ${text}</p>\n        `;
-  let ultima = "";
   for (let i = 0; i < msg.length; i++) {
-    if (i === msg.length - 1) {
-      ultima = "true";
-    }
     tipo = msg[i].type;
     para = msg[i].to;
-    if (tipo === "message") {
-      if (para === "Todos") {
+    if (indexEu !== 99) {
+      console.log(indexEu);
+      if (tipo === "message") {
+        if (para === "Todos") {
+          entrada.innerHTML += `
+          <div class="global">
+            <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+          </div>`;
+          let ultimoElemento = document.querySelector(".corpo").lastChild;
+          ultimoElemento.scrollIntoView();
+        } else if (para !== "Todos") {
+          if (para === nome || msg[i].from === nome) {
+            entrada.innerHTML += `
+            <div class="privado">
+              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+            </div>`;
+            let ultimoElemento = document.querySelector(".corpo").lastChild;
+            ultimoElemento.scrollIntoView();
+          }
+        }
+      } else if (tipo === "status") {
         entrada.innerHTML += `
-        <div class="global">
-          <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
-        </div>`;
-      } else if (to !== "Todos") {
-        entrada.innerHTML += `
-        <div class="privado">
-          <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
-        </div>`;
+          <div class="entrou">
+              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
+          </div>`;
+        let ultimoElemento = document.querySelector(".corpo").lastChild;
+        ultimoElemento.scrollIntoView();
       }
-    } else if (tipo === "status") {
-      entrada.innerHTML += `
-        <div class="entrou">
-            <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
-        </div>`;
+    }
+    if (indexEu === 99) {
+      if (msg[i].from === nome) {
+        indexEu = i;
+        console.log(indexEu);
+        if (tipo === "message") {
+          if (para === "Todos") {
+            entrada.innerHTML += `
+          <div class="global">
+            <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+          </div>`;
+            let ultimoElemento = document.querySelector(".corpo").lastChild;
+            ultimoElemento.scrollIntoView();
+          } else if (para !== "Todos") {
+            if (para === nome) {
+              entrada.innerHTML += `
+            <div class="privado">
+              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
+            </div>`;
+              let ultimoElemento = document.querySelector(".corpo").lastChild;
+              ultimoElemento.scrollIntoView();
+            }
+          }
+        } else if (tipo === "status") {
+          entrada.innerHTML += `
+          <div class="entrou">
+              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
+          </div>`;
+          let ultimoElemento = document.querySelector(".corpo").lastChild;
+          ultimoElemento.scrollIntoView();
+        }
+      }
     }
   }
 }
-
-// function listaUsuarios() {
-//   let dataAtual = new Date();
-//   let hora = dataAtual.getHours();
-//   let min = dataAtual.getMinutes();
-//   let sec = dataAtual.getSeconds();
-//   let entrada = document.querySelector(".corpo");
-//   entrada.innerHTML = `
-//     <div class="entrou">
-//         <p><b>(${hora}:${min}:${sec})</b> <strong> ${nome} </strong> entra na sala...</p>
-//     </div>`;
-// }
-
-function listaUsuarios() {}
 
 function exemplo(array) {
   if (array[0] === nome) {
@@ -139,12 +165,15 @@ function confirmacaoMsg() {
 
 function msgnaofoi() {
   console.log("não chegou");
+  alert(
+    "Você ficou muito tempo inativo, reiniciaremos a página para você enviar mensagem de novo"
+  );
+  window.location.reload();
 }
 
 function funcionamento() {
   perguntaNome();
   entrarNoChat();
-  listaUsuarios();
   setInterval(manterConexao, 5000);
   pegarMensagens();
   setInterval(pegarMensagens, 3000);
