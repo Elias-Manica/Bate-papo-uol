@@ -66,56 +66,36 @@ function printarMensagens(mensagem) {
   msg = mensagem.data;
 
   let entrada = document.querySelector(".corpo");
-  let indexEu = 99;
   entrada.innerHTML = "";
   for (let i = 0; i < msg.length; i++) {
     tipo = msg[i].type;
     para = msg[i].to;
-    if (indexEu !== 99) {
-      if (indexEu < 1) {
-        console.log("Oi");
-      }
-      gif.classList.add("oculto");
-      if (tipo === "message") {
-        if (para === "Todos") {
-          entrada.innerHTML += `
+    gif.classList.add("oculto");
+    if (tipo === "message") {
+      if (para === "Todos") {
+        entrada.innerHTML += `
           <div class="global">
             <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
           </div>`;
-          let ultimoElemento = document.querySelector(".corpo").lastChild;
-          ultimoElemento.scrollIntoView();
-        } else if (para !== "Todos") {
-          if (para === nome || msg[i].from === nome) {
-            entrada.innerHTML += `
+        let ultimoElemento = document.querySelector(".corpo").lastChild;
+        ultimoElemento.scrollIntoView();
+      } else if (para !== "Todos") {
+        if (para === nome || msg[i].from === nome) {
+          entrada.innerHTML += `
             <div class="privado">
               <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> para ${msg[i].to}: ${msg[i].text}</p>
             </div>`;
-            let ultimoElemento = document.querySelector(".corpo").lastChild;
-            ultimoElemento.scrollIntoView();
-          }
-        }
-      } else if (tipo === "status") {
-        entrada.innerHTML += `
-          <div class="entrou">
-              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
-          </div>`;
-        let ultimoElemento = document.querySelector(".corpo").lastChild;
-        ultimoElemento.scrollIntoView();
-      }
-    }
-    if (indexEu === 99) {
-      if (msg[i].from === nome) {
-        indexEu = i;
-
-        if (tipo === "status") {
-          entrada.innerHTML += `
-          <div class="entrou">
-              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
-          </div>`;
           let ultimoElemento = document.querySelector(".corpo").lastChild;
           ultimoElemento.scrollIntoView();
         }
       }
+    } else if (tipo === "status") {
+      entrada.innerHTML += `
+          <div class="entrou">
+              <p><b>(${msg[i].time})</b> <strong> ${msg[i].from} </strong> ${msg[i].text}</p>
+          </div>`;
+      let ultimoElemento = document.querySelector(".corpo").lastChild;
+      ultimoElemento.scrollIntoView();
     }
   }
 }
